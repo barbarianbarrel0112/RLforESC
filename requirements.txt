@@ -1,0 +1,114 @@
+# ============================================================
+# requirements.txt
+# Llama 3.1 8B 全量微调 (情感支持对话 ESConv + ESTES)
+# Python >= 3.10 推荐
+# ============================================================
+
+# ── 深度学习核心 ─────────────────────────────────────────────
+# PyTorch: 根据 CUDA 版本选择安装命令，这里只列版本约束
+# CUDA 12.1:  pip install torch==2.3.1 --index-url https://download.pytorch.org/whl/cu121
+# CUDA 12.4:  pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cu124
+torch>=2.3.1
+
+# ── HuggingFace 生态 ─────────────────────────────────────────
+transformers>=4.43.0          # Llama 3.1 支持需要 >= 4.43
+datasets>=2.20.0              # 数据集加载 (ESConv/ESTES)
+tokenizers>=0.19.0            # 快速 tokenizer
+accelerate>=0.31.0            # 多卡/混合精度训练（Trainer 后端）
+huggingface-hub>=0.24.0       # 模型下载
+
+# ── 训练效率 ──────────────────────────────────────────────────
+# Flash Attention 2（A100/H100 强烈推荐，需要 CUDA >= 11.6 & sm_80+）
+# 如不支持可注释掉，并在 train_llama.py 中将 use_flash_attention=False
+flash-attn>=2.6.0            # 需单独编译: pip install flash-attn --no-build-isolation
+
+# DeepSpeed（多卡 ZeRO-3 必须，单卡可选）
+deepspeed>=0.14.0
+
+# ── 实验管理 ──────────────────────────────────────────────────
+tensorboard>=2.16.0           # 训练曲线可视化 (report_to="tensorboard")
+# wandb>=0.17.0               # 可选：替换 tensorboard (report_to="wandb")
+
+# ── 数据处理 ──────────────────────────────────────────────────
+numpy>=1.26.0
+scipy>=1.13.0
+scikit-learn>=1.4.0           # 评估指标（可选）
+
+# ── 网络请求（数据下载脚本用）─────────────────────────────────
+requests>=2.32.0
+
+# ── 评估指标（可选）─────────────────────────────────────────
+# evaluate>=0.4.0             # HF evaluate 库
+# rouge-score>=0.1.2          # ROUGE（对话生成评估）
+# sacrebleu>=2.4.0            # BLEU（对话生成评估）
+
+# ── 其他工具 ──────────────────────────────────────────────────
+tqdm>=4.66.0                  # 进度条
+pyyaml>=6.0.1                 # 配置文件解析
+
+# ============================================================
+# 安装说明（推荐顺序）
+# ============================================================
+#
+# 1. 创建 conda 环境:
+#    conda create -n rlesc python=3.10 -y
+#    conda activate rlesc
+#
+# 2. 安装 PyTorch (根据你的 CUDA 版本选择):
+#    CUDA 12.1: pip install torch==2.3.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+#    CUDA 12.4: pip install torch==2.4.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+#
+# 3. 安装其余依赖:
+#    pip install -r requirements.txt
+#
+# 4. (推荐) 安装 Flash Attention 2:
+#    pip install flash-attn --no-build-isolation
+#
+# 5. (多卡) 安装 DeepSpeed:
+#    pip install deepspeed
+#    ds_report  # 验证 DeepSpeed 配置
+#
+# 6. 登录 HuggingFace (需要 Llama 3.1 访问权限):
+#    huggingface-cli login
+#
+# 7. 下载数据集:
+#    python download_datasets.py
+#
+# 8. 分析数据集:
+#    python analyze_datasets.py
+#
+# 9. 开始训练（单卡）:
+#    python train_llama.py \
+#      --model_name_or_path meta-llama/Meta-Llama-3.1-8B-Instruct \
+#      --output_dir checkpoints/llama3-esc \
+#      --num_train_epochs 3 \
+#      --per_device_train_batch_size 2 \
+#      --gradient_accumulation_steps 8 \
+#      --learning_rate 2e-5 \
+#      --bf16 True \
+#      --gradient_checkpointing True
+#
+# 10. 开始训练（4卡 torchrun）:
+#     torchrun --nproc_per_node=4 train_llama.py \
+#       --model_name_or_path meta-llama/Meta-Llama-3.1-8B-Instruct \
+#       --output_dir checkpoints/llama3-esc \
+#       --num_train_epochs 3 \
+#       --per_device_train_batch_size 2 \
+#       --gradient_accumulation_steps 4 \
+#       --learning_rate 2e-5 \
+#       --bf16 True \
+#       --gradient_checkpointing True
+#
+# ============================================================
+# 硬件需求参考 (全量微调 Llama 3.1 8B)
+# ============================================================
+#
+# 精度       | VRAM 估算 | 推荐配置
+# -----------+-----------+-------------------------------------------
+# BF16       | ~64 GB    | 2x A100 80GB 或 4x A100 40GB (ZeRO-3)
+# BF16+GC    | ~48 GB    | 2x A100 40GB (ZeRO-2+GradCkpt)
+# BF16+ZeRO3 | ~20 GB/卡 | 4x RTX 3090/4090 (ZeRO-3, 数据并行)
+#
+# GC = gradient_checkpointing (节省 ~30% 显存, 速度降低 ~20%)
+# ZeRO-3 需要 deepspeed，参数分片到多卡
+# ============================================================
