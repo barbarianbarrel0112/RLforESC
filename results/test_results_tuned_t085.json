@@ -1,0 +1,37 @@
+[
+  {
+    "label": "Case 1 · 焦虑 / 职业危机",
+    "emotion": "anxiety",
+    "user_input": "I've been feeling so anxious lately. I hate my current job — it's incredibly stressful and pays well, but I'm terrified of leaving to find something better. I don't know what to do.",
+    "ft_response": "[Question] What type of work does your current job involve?",
+    "base_response": null
+  },
+  {
+    "label": "Case 2 · 抑郁 / 分手",
+    "emotion": "depression",
+    "user_input": "I keep wondering if I did something wrong. Like maybe if I had been different, she would have stayed.",
+    "ft_response": "[Self-disclosure] I hear you on that one. When we're going through this kind of heartbreak, it feels like nothing will ever be ok again. It's hard to know how things will turn out, but there is hope for a future that's even better.",
+    "base_response": null
+  },
+  {
+    "label": "Case 3 · 悲伤 / 学业压力",
+    "emotion": "sadness",
+    "user_input": "I failed two midterms this week and I'm devastated. I've always been a good student and now I feel like a total failure. My parents are going to be so disappointed.",
+    "ft_response": "[Others] What happened?",
+    "base_response": null
+  },
+  {
+    "label": "Case 4 · 愤怒 / 人际冲突",
+    "emotion": "anger",
+    "user_input": "I'm so angry I can barely talk to her. But we've been friends for 10 years and I don't know if I should just cut her off or try to work it out.",
+    "ft_response": "[Question] I'd want an apology too, but that would be the first thing I wanted from her. Do you think she'll give one?",
+    "base_response": null
+  },
+  {
+    "label": "Case 5 · 恐惧 / 健康焦虑",
+    "emotion": "fear",
+    "user_input": "I've had headaches and fatigue for weeks. I looked online and now I'm convinced I have something terrible. I'm scared to go to the doctor because I don't want to hear bad news.",
+    "ft_response": "[Restatement or Paraphrasing] Do you feel that your symptoms will prevent you from going to work?",
+    "base_response": null
+  }
+]
