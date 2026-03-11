@@ -1,0 +1,201 @@
+{
+  "distribution": {
+    "all": {
+      "Question": 3596,
+      "Affirmation and Reassurance": 2691,
+      "Others": 3081,
+      "Information": 1155,
+      "Self-disclosure": 1649,
+      "Providing Suggestions": 2842,
+      "Restatement or Paraphrasing": 1036,
+      "Reflection of feelings": 1375
+    },
+    "train": {
+      "Question": 2902,
+      "Affirmation and Reassurance": 2195,
+      "Others": 2435,
+      "Information": 877,
+      "Self-disclosure": 1388,
+      "Providing Suggestions": 2223,
+      "Restatement or Paraphrasing": 814,
+      "Reflection of feelings": 1118
+    },
+    "valid": {
+      "Others": 323,
+      "Question": 343,
+      "Restatement or Paraphrasing": 110,
+      "Affirmation and Reassurance": 243,
+      "Self-disclosure": 143,
+      "Reflection of feelings": 115,
+      "Information": 172,
+      "Providing Suggestions": 341
+    },
+    "test": {
+      "Others": 323,
+      "Affirmation and Reassurance": 253,
+      "Providing Suggestions": 278,
+      "Restatement or Paraphrasing": 112,
+      "Question": 351,
+      "Self-disclosure": 118,
+      "Reflection of feelings": 142,
+      "Information": 106
+    }
+  },
+  "others_context": {
+    "total": 6162,
+    "before": {
+      "Others": 1754,
+      "Affirmation and Reassurance": 948,
+      "Providing Suggestions": 934,
+      "Question": 706,
+      "Self-disclosure": 486,
+      "<start>": 454,
+      "Reflection of feelings": 336,
+      "Information": 332,
+      "Restatement or Paraphrasing": 212
+    },
+    "after": {
+      "Others": 1754,
+      "<end>": 1494,
+      "Question": 726,
+      "Affirmation and Reassurance": 640,
+      "Providing Suggestions": 520,
+      "Self-disclosure": 314,
+      "Information": 266,
+      "Reflection of feelings": 264,
+      "Restatement or Paraphrasing": 184
+    }
+  },
+  "others_by_emotion": {
+    "anger": {
+      "total": 2828,
+      "others": 450,
+      "others_rate": 15.91
+    },
+    "anxiety": {
+      "total": 9466,
+      "others": 1656,
+      "others_rate": 17.49
+    },
+    "depression": {
+      "total": 8874,
+      "others": 1510,
+      "others_rate": 17.02
+    },
+    "disgust": {
+      "total": 1136,
+      "others": 238,
+      "others_rate": 20.95
+    },
+    "fear": {
+      "total": 2620,
+      "others": 464,
+      "others_rate": 17.71
+    },
+    "guilt": {
+      "total": 26,
+      "others": 2,
+      "others_rate": 7.69
+    },
+    "jealousy": {
+      "total": 28,
+      "others": 12,
+      "others_rate": 42.86
+    },
+    "nervousness": {
+      "total": 348,
+      "others": 80,
+      "others_rate": 22.99
+    },
+    "pain": {
+      "total": 28,
+      "others": 4,
+      "others_rate": 14.29
+    },
+    "sadness": {
+      "total": 8354,
+      "others": 1500,
+      "others_rate": 17.96
+    },
+    "shame": {
+      "total": 1142,
+      "others": 246,
+      "others_rate": 21.54
+    }
+  },
+  "others_by_problem": {
+    "Alcohol Abuse": {
+      "total": 390,
+      "others": 82,
+      "others_rate": 21.03
+    },
+    "Appearance Anxiety": {
+      "total": 346,
+      "others": 48,
+      "others_rate": 13.87
+    },
+    "Issues with Children": {
+      "total": 280,
+      "others": 50,
+      "others_rate": 17.86
+    },
+    "Issues with Parents": {
+      "total": 254,
+      "others": 38,
+      "others_rate": 14.96
+    },
+    "Procrastination": {
+      "total": 386,
+      "others": 66,
+      "others_rate": 17.1
+    },
+    "School Bullying": {
+      "total": 52,
+      "others": 10,
+      "others_rate": 19.23
+    },
+    "Sleep Problems": {
+      "total": 836,
+      "others": 140,
+      "others_rate": 16.75
+    },
+    "academic pressure": {
+      "total": 4096,
+      "others": 740,
+      "others_rate": 18.07
+    },
+    "breakup with partner": {
+      "total": 6532,
+      "others": 1082,
+      "others_rate": 16.56
+    },
+    "conflict with parents": {
+      "total": 256,
+      "others": 36,
+      "others_rate": 14.06
+    },
+    "job crisis": {
+      "total": 7564,
+      "others": 1362,
+      "others_rate": 18.01
+    },
+    "ongoing depression": {
+      "total": 9242,
+      "others": 1644,
+      "others_rate": 17.79
+    },
+    "problems with friends": {
+      "total": 4616,
+      "others": 864,
+      "others_rate": 18.72
+    }
+  },
+  "dialogue_diversity": {
+    "total_dialogues": 2544,
+    "dialogues_with_Others": 2210,
+    "pct_dialogues_with_Others": 86.9,
+    "avg_unique_strategies_per_dialogue": 6.03,
+    "avg_relative_position_of_Others": 0.478,
+    "note": "0.0=first turn, 1.0=last turn"
+  }
+}

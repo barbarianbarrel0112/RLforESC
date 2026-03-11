@@ -1,0 +1,199 @@
+{
+  "overall": {
+    "total_turns": 13952,
+    "HK_count": 1804,
+    "HK_pct": 12.93,
+    "WK_count": 711,
+    "WK_pct": 5.1,
+    "UK_count": 11437,
+    "UK_pct": 81.97,
+    "mean_ci": 0.1515,
+    "std_ci": 0.3451,
+    "mean_ei": 0.0404
+  },
+  "by_strategy": {
+    "Affirmation and Reassurance": {
+      "count": 2195,
+      "mean_ci": 0.0,
+      "std_ci": 0.0,
+      "HK_pct": 0.0,
+      "WK_pct": 0.0,
+      "UK_pct": 100.0
+    },
+    "Others": {
+      "count": 2435,
+      "mean_ci": 0.0,
+      "std_ci": 0.0,
+      "HK_pct": 0.0,
+      "WK_pct": 0.0,
+      "UK_pct": 100.0
+    },
+    "Information": {
+      "count": 877,
+      "mean_ci": 0.0,
+      "std_ci": 0.0,
+      "HK_pct": 0.0,
+      "WK_pct": 0.0,
+      "UK_pct": 100.0
+    },
+    "Self-disclosure": {
+      "count": 1388,
+      "mean_ci": 0.0,
+      "std_ci": 0.0,
+      "HK_pct": 0.0,
+      "WK_pct": 0.0,
+      "UK_pct": 100.0
+    },
+    "Providing Suggestions": {
+      "count": 2223,
+      "mean_ci": 0.0,
+      "std_ci": 0.0,
+      "HK_pct": 0.0,
+      "WK_pct": 0.0,
+      "UK_pct": 100.0
+    },
+    "Restatement or Paraphrasing": {
+      "count": 814,
+      "mean_ci": 0.0,
+      "std_ci": 0.0,
+      "HK_pct": 0.0,
+      "WK_pct": 0.0,
+      "UK_pct": 100.0
+    },
+    "Reflection of feelings": {
+      "count": 1118,
+      "mean_ci": 0.0623,
+      "std_ci": 0.1482,
+      "HK_pct": 0.2,
+      "WK_pct": 20.4,
+      "UK_pct": 79.4
+    },
+    "Question": {
+      "count": 2902,
+      "mean_ci": 0.7042,
+      "std_ci": 0.4209,
+      "HK_pct": 62.1,
+      "WK_pct": 16.6,
+      "UK_pct": 21.3
+    }
+  },
+  "by_turn_depth": {
+    "depth_0-3": {
+      "count": 1999,
+      "mean_ci": 0.6211
+    },
+    "depth_4-7": {
+      "count": 2004,
+      "mean_ci": 0.2336
+    },
+    "depth_8-11": {
+      "count": 1958,
+      "mean_ci": 0.0967
+    },
+    "depth_12-15": {
+      "count": 1949,
+      "mean_ci": 0.0478
+    },
+    "depth_16-19": {
+      "count": 1906,
+      "mean_ci": 0.0252
+    },
+    "depth_20-23": {
+      "count": 1545,
+      "mean_ci": 0.0249
+    },
+    "depth_24-27": {
+      "count": 1010,
+      "mean_ci": 0.0135
+    },
+    "depth_28-31": {
+      "count": 621,
+      "mean_ci": 0.0153
+    },
+    "depth_32-35": {
+      "count": 385,
+      "mean_ci": 0.0172
+    },
+    "depth_36-39": {
+      "count": 264,
+      "mean_ci": 0.0123
+    },
+    "depth_40-43": {
+      "count": 150,
+      "mean_ci": 0.0042
+    },
+    "depth_44-47": {
+      "count": 86,
+      "mean_ci": 0.0087
+    },
+    "depth_48-51": {
+      "count": 49,
+      "mean_ci": 0.0
+    },
+    "depth_52-55": {
+      "count": 18,
+      "mean_ci": 0.0
+    },
+    "depth_56-59": {
+      "count": 8,
+      "mean_ci": 0.0
+    }
+  },
+  "by_context_length": {
+    "len_0-199": {
+      "count": 5662,
+      "mean_ci": 0.3327
+    },
+    "len_200-399": {
+      "count": 3857,
+      "mean_ci": 0.0388
+    },
+    "len_400-599": {
+      "count": 2720,
+      "mean_ci": 0.0234
+    },
+    "len_600-799": {
+      "count": 1174,
+      "mean_ci": 0.0111
+    },
+    "len_800-999": {
+      "count": 390,
+      "mean_ci": 0.0048
+    },
+    "len_1000-1199": {
+      "count": 114,
+      "mean_ci": 0.0077
+    },
+    "len_1200-1399": {
+      "count": 24,
+      "mean_ci": 0.0
+    },
+    "len_1400-1599": {
+      "count": 9,
+      "mean_ci": 0.0
+    },
+    "len_1600-1799": {
+      "count": 2,
+      "mean_ci": 0.0
+    }
+  },
+  "dialog_level": {
+    "num_dialogs": 1017,
+    "mean_within_dialog_ci_std": 0.3231,
+    "pct_dialogs_mixed_regions": 94.9
+  },
+  "strategy_transitions": {
+    "hardest_10": {},
+    "easiest_5": {}
+  },
+  "uk_strategy_distribution": {
+    "Others": 2435,
+    "Providing Suggestions": 2223,
+    "Affirmation and Reassurance": 2195,
+    "Self-disclosure": 1388,
+    "Reflection of feelings": 888,
+    "Information": 877,
+    "Restatement or Paraphrasing": 814,
+    "Question": 617
+  }
+}

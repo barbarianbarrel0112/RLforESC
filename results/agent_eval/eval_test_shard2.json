@@ -1,0 +1,78 @@
+{
+  "accuracy": 0.2239,
+  "per_strategy": {
+    "Self-disclosure": 0.0,
+    "Information": 0.0,
+    "Restatement or Paraphrasing": 0.0357,
+    "Question": 0.0545,
+    "Reflection of feelings": 0.2051,
+    "Affirmation and Reassurance": 0.2394,
+    "Providing Suggestions": 0.2963,
+    "Others": 0.4684
+  },
+  "confusion": {
+    "Question": {
+      "Others": 13,
+      "Affirmation and Reassurance": 15,
+      "Providing Suggestions": 7,
+      "Reflection of feelings": 11,
+      "Restatement or Paraphrasing": 6,
+      "Question": 3
+    },
+    "Restatement or Paraphrasing": {
+      "Others": 3,
+      "Reflection of feelings": 10,
+      "Providing Suggestions": 7,
+      "Information": 1,
+      "Affirmation and Reassurance": 4,
+      "Restatement or Paraphrasing": 1,
+      "Question": 2
+    },
+    "Reflection of feelings": {
+      "Others": 4,
+      "Providing Suggestions": 6,
+      "Reflection of feelings": 8,
+      "Affirmation and Reassurance": 16,
+      "Restatement or Paraphrasing": 5
+    },
+    "Affirmation and Reassurance": {
+      "Reflection of feelings": 18,
+      "Providing Suggestions": 17,
+      "Others": 13,
+      "Affirmation and Reassurance": 17,
+      "Restatement or Paraphrasing": 3,
+      "Self-disclosure": 2,
+      "Information": 1
+    },
+    "Providing Suggestions": {
+      "Providing Suggestions": 24,
+      "Reflection of feelings": 23,
+      "Affirmation and Reassurance": 21,
+      "Restatement or Paraphrasing": 3,
+      "Others": 10
+    },
+    "Others": {
+      "Others": 37,
+      "Providing Suggestions": 10,
+      "Affirmation and Reassurance": 26,
+      "Reflection of feelings": 5,
+      "Information": 1
+    },
+    "Self-disclosure": {
+      "Providing Suggestions": 7,
+      "Restatement or Paraphrasing": 2,
+      "Reflection of feelings": 4,
+      "Affirmation and Reassurance": 7,
+      "Others": 1
+    },
+    "Information": {
+      "Reflection of feelings": 4,
+      "Providing Suggestions": 9,
+      "Self-disclosure": 1,
+      "Others": 5,
+      "Affirmation and Reassurance": 9
+    }
+  },
+  "n_total": 402,
+  "n_correct": 90
+}

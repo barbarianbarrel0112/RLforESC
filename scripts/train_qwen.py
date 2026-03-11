@@ -67,7 +67,7 @@ class DataArguments:
         metadata={"help": "清洗后的 ESConv 数据目录"},
     )
     max_seq_length: int = field(
-        default=2048,
+        default=1024,
         metadata={"help": "最大 token 长度（超出截断）"},
     )
     use_strategy_prompt: bool = field(
@@ -86,12 +86,12 @@ class DataArguments:
 
 @dataclass
 class TrainArguments(TrainingArguments):
-    output_dir: str = field(default="checkpoints/qwen25-esc")
-    num_train_epochs: int = field(default=3)
+    output_dir: str = field(default="checkpoints/qwen25-esc-v2")
+    num_train_epochs: int = field(default=2)
     per_device_train_batch_size: int = field(default=2)
     per_device_eval_batch_size: int = field(default=2)
     gradient_accumulation_steps: int = field(default=8)   # 等效 batch=16
-    learning_rate: float = field(default=2e-5)
+    learning_rate: float = field(default=1e-5)
     weight_decay: float = field(default=0.01)
     warmup_ratio: float = field(default=0.03)
     lr_scheduler_type: str = field(default="cosine")
@@ -274,7 +274,7 @@ class EmotionalSupportDataset(Dataset):
 # ─────────────────────────────────────────────────────────────────────────────
 
 class ESCDataCollator:
-    def __init__(self, tokenizer, max_length: int = 2048):
+    def __init__(self, tokenizer, max_length: int = 1024):
         self.tokenizer = tokenizer
         self.max_length = max_length
         self.pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else 0
@@ -347,7 +347,9 @@ def load_model_and_tokenizer(model_args: ModelArguments, train_args: TrainArgume
     if train_args.deepspeed:
         model = AutoModelForCausalLM.from_pretrained(**model_kwargs)
     else:
-        model = AutoModelForCausalLM.from_pretrained(**model_kwargs, device_map="auto")
+        # device_map="auto" is incompatible with DDP (multi-GPU via accelerate/torchrun)
+        # Accelerate handles device placement automatically
+        model = AutoModelForCausalLM.from_pretrained(**model_kwargs)
 
     if train_args.gradient_checkpointing:
         model.gradient_checkpointing_enable(

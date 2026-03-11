@@ -1,0 +1,87 @@
+{
+  "accuracy": 0.2412,
+  "per_strategy": {
+    "Self-disclosure": 0.0,
+    "Information": 0.037,
+    "Question": 0.0714,
+    "Reflection of feelings": 0.1795,
+    "Restatement or Paraphrasing": 0.2069,
+    "Affirmation and Reassurance": 0.2632,
+    "Others": 0.4638,
+    "Providing Suggestions": 0.4677
+  },
+  "confusion": {
+    "Question": {
+      "Others": 19,
+      "Restatement or Paraphrasing": 6,
+      "Affirmation and Reassurance": 14,
+      "Reflection of feelings": 30,
+      "Providing Suggestions": 8,
+      "Question": 6,
+      "Information": 1
+    },
+    "Reflection of feelings": {
+      "Affirmation and Reassurance": 17,
+      "Question": 1,
+      "Reflection of feelings": 7,
+      "Restatement or Paraphrasing": 2,
+      "Information": 3,
+      "Providing Suggestions": 5,
+      "Self-disclosure": 2,
+      "Others": 2
+    },
+    "Self-disclosure": {
+      "Restatement or Paraphrasing": 2,
+      "Providing Suggestions": 9,
+      "Reflection of feelings": 7,
+      "Others": 4,
+      "Affirmation and Reassurance": 7,
+      "Information": 1,
+      "Question": 1
+    },
+    "Providing Suggestions": {
+      "Restatement or Paraphrasing": 2,
+      "Affirmation and Reassurance": 14,
+      "Providing Suggestions": 29,
+      "Reflection of feelings": 11,
+      "Information": 3,
+      "Others": 3
+    },
+    "Restatement or Paraphrasing": {
+      "Information": 1,
+      "Restatement or Paraphrasing": 6,
+      "Affirmation and Reassurance": 9,
+      "Others": 3,
+      "Question": 3,
+      "Providing Suggestions": 2,
+      "Reflection of feelings": 4,
+      "Self-disclosure": 1
+    },
+    "Information": {
+      "Providing Suggestions": 11,
+      "Reflection of feelings": 3,
+      "Affirmation and Reassurance": 10,
+      "Restatement or Paraphrasing": 2,
+      "Information": 1
+    },
+    "Affirmation and Reassurance": {
+      "Affirmation and Reassurance": 15,
+      "Others": 7,
+      "Reflection of feelings": 18,
+      "Restatement or Paraphrasing": 3,
+      "Providing Suggestions": 11,
+      "Information": 1,
+      "Question": 2
+    },
+    "Others": {
+      "Others": 32,
+      "Affirmation and Reassurance": 15,
+      "Reflection of feelings": 10,
+      "Providing Suggestions": 10,
+      "Restatement or Paraphrasing": 1,
+      "Question": 1
+    }
+  },
+  "n_total": 398,
+  "n_correct": 96
+}

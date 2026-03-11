@@ -1,0 +1,164 @@
+========================================================================
+  SAMPLE OF 'Others' STRATEGY RESPONSES  (n=40)
+========================================================================
+
+[01] Split: all  |  Emotion: nervousness  |  Problem: academic pressure
+     PREV: Reflection of feelings               NEXT: Question
+     CONTENT: If you do some of those suggestions I believe you will be just fine.
+------------------------------------------------------------------------
+[02] Split: test  |  Emotion: depression  |  Problem: ongoing depression
+     PREV: Providing Suggestions                NEXT: <end>
+     CONTENT: You are welcome
+------------------------------------------------------------------------
+[03] Split: train  |  Emotion: anxiety  |  Problem: breakup with partner
+     PREV: Providing Suggestions                NEXT: Question
+     CONTENT: You are most welcome. I have a few minutes left to talk if there's anything else on your mind?
+------------------------------------------------------------------------
+[04] Split: train  |  Emotion: anxiety  |  Problem: job crisis
+     PREV: Providing Suggestions                NEXT: Others
+     CONTENT: as we were told growing up the worst they could say is no,
+------------------------------------------------------------------------
+[05] Split: train  |  Emotion: anxiety  |  Problem: academic pressure
+     PREV: Question                             NEXT: Affirmation and Reassurance
+     CONTENT: if you prefer to be able to discuss in person, how about do an in person meeting at the park or open space? That way you can keep your distance
+------------------------------------------------------------------------
+[06] Split: all  |  Emotion: anger  |  Problem: job crisis
+     PREV: Self-disclosure                      NEXT: Others
+     CONTENT: Your most welcome
+------------------------------------------------------------------------
+[07] Split: train  |  Emotion: sadness  |  Problem: Issues with Children
+     PREV: Question                             NEXT: Self-disclosure
+     CONTENT: yes I'm fine thank you , how is your day today?
+------------------------------------------------------------------------
+[08] Split: all  |  Emotion: depression  |  Problem: ongoing depression
+     PREV: Affirmation and Reassurance          NEXT: Others
+     CONTENT: I work from home and also take a few online classes.
+------------------------------------------------------------------------
+[09] Split: valid  |  Emotion: fear  |  Problem: job crisis
+     PREV: Affirmation and Reassurance          NEXT: Affirmation and Reassurance
+     CONTENT: I know it would be hard to find a new job, which is why you should always be prepared
+------------------------------------------------------------------------
+[10] Split: all  |  Emotion: depression  |  Problem: breakup with partner
+     PREV: Affirmation and Reassurance          NEXT: <end>
+     CONTENT: Me too.
+------------------------------------------------------------------------
+[11] Split: all  |  Emotion: shame  |  Problem: problems with friends
+     PREV: Providing Suggestions                NEXT: Providing Suggestions
+     CONTENT: times and situations change so thats ok.
+------------------------------------------------------------------------
+[12] Split: all  |  Emotion: fear  |  Problem: job crisis
+     PREV: Affirmation and Reassurance          NEXT: Affirmation and Reassurance
+     CONTENT: I know it would be hard to find a new job, which is why you should always be prepared
+------------------------------------------------------------------------
+[13] Split: train  |  Emotion: sadness  |  Problem: problems with friends
+     PREV: Others                               NEXT: Others
+     CONTENT: Sounds great. You can let me know if you found a book club.
+------------------------------------------------------------------------
+[14] Split: all  |  Emotion: anxiety  |  Problem: problems with friends
+     PREV: <start>                              NEXT: Question
+     CONTENT: Hello, how are you today.
+------------------------------------------------------------------------
+[15] Split: train  |  Emotion: anxiety  |  Problem: breakup with partner
+     PREV: Others                               NEXT: <end>
+     CONTENT: Have a good day.
+------------------------------------------------------------------------
+[16] Split: train  |  Emotion: depression  |  Problem: ongoing depression
+     PREV: <start>                              NEXT: Question
+     CONTENT: I'm good. sorry I stepped out.
+------------------------------------------------------------------------
+[17] Split: train  |  Emotion: anger  |  Problem: Issues with Parents
+     PREV: Others                               NEXT: <end>
+     CONTENT: I truly wish you the best.   Stay calm, you're a stone, and will get through this until you can leave.
+------------------------------------------------------------------------
+[18] Split: all  |  Emotion: disgust  |  Problem: ongoing depression
+     PREV: Providing Suggestions                NEXT: Question
+     CONTENT: I understand completley.
+------------------------------------------------------------------------
+[19] Split: all  |  Emotion: anger  |  Problem: ongoing depression
+     PREV: Affirmation and Reassurance          NEXT: Others
+     CONTENT: I hope they will be well receptive of your suggestion for a follow up.
+------------------------------------------------------------------------
+[20] Split: train  |  Emotion: sadness  |  Problem: problems with friends
+     PREV: Affirmation and Reassurance          NEXT: Others
+     CONTENT: Do you feel like you have a better understanding of what to do?
+------------------------------------------------------------------------
+[21] Split: train  |  Emotion: nervousness  |  Problem: academic pressure
+     PREV: Providing Suggestions                NEXT: Others
+     CONTENT: yes, i hope everything ends well.
+------------------------------------------------------------------------
+[22] Split: train  |  Emotion: anxiety  |  Problem: job crisis
+     PREV: Providing Suggestions                NEXT: <end>
+     CONTENT: no problem!
+------------------------------------------------------------------------
+[23] Split: train  |  Emotion: sadness  |  Problem: breakup with partner
+     PREV: Providing Suggestions                NEXT: <end>
+     CONTENT: OK. Have a blessed night.
+------------------------------------------------------------------------
+[24] Split: train  |  Emotion: anxiety  |  Problem: academic pressure
+     PREV: Self-disclosure                      NEXT: Question
+     CONTENT: Aw i am sorry to hear that, school deadlines can be very stressful.
+------------------------------------------------------------------------
+[25] Split: train  |  Emotion: fear  |  Problem: problems with friends
+     PREV: Others                               NEXT: Providing Suggestions
+     CONTENT: Things will get better for you to
+------------------------------------------------------------------------
+[26] Split: all  |  Emotion: sadness  |  Problem: breakup with partner
+     PREV: Restatement or Paraphrasing          NEXT: Reflection of feelings
+     CONTENT: That's very good
+------------------------------------------------------------------------
+[27] Split: all  |  Emotion: anxiety  |  Problem: academic pressure
+     PREV: Reflection of feelings               NEXT: Providing Suggestions
+     CONTENT: Absolutely, I appreciate the chance to speak with you and give suggestions.
+------------------------------------------------------------------------
+[28] Split: all  |  Emotion: depression  |  Problem: job crisis
+     PREV: Others                               NEXT: Others
+     CONTENT: Thank you for talking and I hope you feel okay
+------------------------------------------------------------------------
+[29] Split: all  |  Emotion: anxiety  |  Problem: job crisis
+     PREV: <start>                              NEXT: Reflection of feelings
+     CONTENT: How may i help you today?
+------------------------------------------------------------------------
+[30] Split: valid  |  Emotion: sadness  |  Problem: ongoing depression
+     PREV: Others                               NEXT: <end>
+     CONTENT: Good night!
+------------------------------------------------------------------------
+[31] Split: all  |  Emotion: anxiety  |  Problem: job crisis
+     PREV: Others                               NEXT: Restatement or Paraphrasing
+     CONTENT: Yes, I know! It's supposed to snow this week where I am.  So, I understand you are in need of someone to talk to. What's going on.
+------------------------------------------------------------------------
+[32] Split: all  |  Emotion: sadness  |  Problem: breakup with partner
+     PREV: Question                             NEXT: Restatement or Paraphrasing
+     CONTENT: You are doing well?  That is great to hear.  I am the support provider, do you have any questions or problems?
+------------------------------------------------------------------------
+[33] Split: all  |  Emotion: fear  |  Problem: academic pressure
+     PREV: Providing Suggestions                NEXT: Others
+     CONTENT: Yes it is very difficult to standing up for yourself if you're being emotionally bullied.
+------------------------------------------------------------------------
+[34] Split: all  |  Emotion: anxiety  |  Problem: job crisis
+     PREV: Providing Suggestions                NEXT: Question
+     CONTENT: I believe we have to each do 10 chat bubbles.
+------------------------------------------------------------------------
+[35] Split: train  |  Emotion: sadness  |  Problem: problems with friends
+     PREV: Others                               NEXT: Others
+     CONTENT: bye!
+------------------------------------------------------------------------
+[36] Split: train  |  Emotion: fear  |  Problem: academic pressure
+     PREV: Providing Suggestions                NEXT: Affirmation and Reassurance
+     CONTENT: Yes I think so though I am not totally sure. There should be someone at your school, online or not, who can advise you.
+------------------------------------------------------------------------
+[37] Split: all  |  Emotion: anxiety  |  Problem: ongoing depression
+     PREV: Affirmation and Reassurance          NEXT: Reflection of feelings
+     CONTENT: I totally agree. I am not totally sure what the solution is but I am hoping that there is one
+------------------------------------------------------------------------
+[38] Split: train  |  Emotion: nervousness  |  Problem: conflict with parents
+     PREV: Affirmation and Reassurance          NEXT: <end>
+     CONTENT: good luck with your court
+------------------------------------------------------------------------
+[39] Split: all  |  Emotion: sadness  |  Problem: breakup with partner
+     PREV: Providing Suggestions                NEXT: <end>
+     CONTENT: You are more than welcome. I hope that you feel better by being outside.
+------------------------------------------------------------------------
+[40] Split: all  |  Emotion: depression  |  Problem: ongoing depression
+     PREV: Providing Suggestions                NEXT: <end>
+     CONTENT: If you're able to receive the message  I hope you feel a little more peaceful.
+------------------------------------------------------------------------

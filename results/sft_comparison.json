@@ -1,0 +1,36 @@
+{
+  "v1": {
+    "lr": "2e-5",
+    "epochs": 3,
+    "maxlen": 2048,
+    "overall": {
+      "total_turns": 13952,
+      "HK_count": 1804,
+      "HK_pct": 12.93,
+      "WK_count": 711,
+      "WK_pct": 5.1,
+      "UK_count": 11437,
+      "UK_pct": 81.97,
+      "mean_ci": 0.1515,
+      "std_ci": 0.3451,
+      "mean_ei": 0.0404
+    }
+  },
+  "v2": {
+    "lr": "1e-5",
+    "epochs": 2,
+    "maxlen": 1024,
+    "overall": {
+      "total_turns": 13952,
+      "HK_count": 2294,
+      "HK_pct": 16.44,
+      "WK_count": 349,
+      "WK_pct": 2.5,
+      "UK_count": 11309,
+      "UK_pct": 81.06,
+      "mean_ci": 0.1773,
+      "std_ci": 0.3759,
+      "mean_ei": 0.0196
+    }
+  }
+}

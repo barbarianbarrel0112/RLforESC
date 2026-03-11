@@ -49,3 +49,5 @@ env/
 # ── 系统文件 ────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
+data/knowledge_boundaries/train_turns_shard*.json
+data/knowledge_boundaries_v2/train_turns_shard*.json

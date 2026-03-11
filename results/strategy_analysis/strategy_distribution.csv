@@ -1,0 +1,10 @@
+Strategy,all_count,train_count,valid_count,test_count,all_pct,train_pct,valid_pct,test_pct
+Question,3596,2902,343,351,20.64%,20.80%,19.16%,20.86%
+Restatement or Paraphrasing,1036,814,110,112,5.95%,5.83%,6.15%,6.65%
+Reflection of feelings,1375,1118,115,142,7.89%,8.01%,6.42%,8.44%
+Self-disclosure,1649,1388,143,118,9.46%,9.95%,7.99%,7.01%
+Affirmation and Reassurance,2691,2195,243,253,15.44%,15.73%,13.58%,15.03%
+Providing Suggestions,2842,2223,341,278,16.31%,15.93%,19.05%,16.52%
+Information,1155,877,172,106,6.63%,6.29%,9.61%,6.30%
+Others,3081,2435,323,323,17.68%,17.45%,18.04%,19.19%
+TOTAL,17425,13952,1790,1683,100.00%,100.00%,100.00%,100.00%
