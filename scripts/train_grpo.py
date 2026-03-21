@@ -7,15 +7,21 @@ Two modes:
   --mode standard  : Standard GRPO with binary accuracy reward
                      r_i = 1.0 if completion_i has correct strategy, else 0.0
 
-  --mode dual      : Paper's novel dual-reward GRPO
-                     r_i = w_acc(region) * [1 if correct else 0]
-                           + w_ent(region) * ei
-                     where ci, ei, region come from pre-computed knowledge boundaries
+  --mode dual      : Paper's dual-reward GRPO (exact formula from arXiv:2509.12661)
+                     r(hi, ỹi) = ci + r_region(hi, ỹi)
 
-Region-specific weights (from paper):
-  HK (Highly Known, ci=1):  w_acc=1.0, w_ent=0.0
-  WK (Weakly Known, 0<ci<1): w_acc=0.5, w_ent=0.5
-  UK (Unknown, ci=0):        w_acc=0.0, w_ent=1.0
+                     where:
+                       ci        = per-completion accuracy (1 if correct, else 0)
+                       r_region  = 1 - ei / ln(|S|)   for HK/WK regions
+                                   ei / ln(|S|)        for UK region
+                       ei        = pre-computed KB multi-class entropy (nats):
+                                   ei = -Σ_{s∈S} p(s|hi) ln p(s|hi)
+                       ln(|S|)   = ln(8) ≈ 2.079  (normalizes r_region to [0,1])
+
+                     Region classification (from KB delineation):
+                       HK (Highly Known, ci_KB=1):   r_region = 1 - ei/ln(8)  → encourages low entropy
+                       WK (Weakly Known, 0<ci_KB<1): r_region = 1 - ei/ln(8)  → same as HK
+                       UK (Unknown, ci_KB=0):         r_region = ei/ln(8)      → encourages high entropy
 
 KL penalty β = 0.001 (applied inside GRPOConfig)
 
