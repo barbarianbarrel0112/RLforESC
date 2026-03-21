@@ -21,6 +21,7 @@ import math
 import os
 import re
 import time
+from collections import Counter
 from pathlib import Path
 
 import torch
@@ -46,18 +47,12 @@ STRATEGY_PATTERN = re.compile(
 
 # ── Agent-style system prompt（含8策略定义，但不要求CoT以节省token）────────────
 AGENT_SYSTEM_PROMPT = """\
-You are a compassionate and skilled emotional support counselor.
+You are an emotional support counselor. Your ONLY task is to output a strategy tag.
 
-Given the conversation history and the user's latest message, identify the \
-single most appropriate support strategy from the 8 defined below.
-
-## Output Format
-Output ONLY the strategy tag — nothing else:
+⚠️ STRICT FORMAT: Your entire response must be exactly one line:
 [Strategy Name]
 
-Do NOT write a response. Do NOT explain your reasoning. Output only the tag.
-
-Example output: [Reflection of feelings]
+Choose from these 8 strategies:
 
 ## The 8 Support Strategies
 
@@ -92,12 +87,33 @@ or transitions that don't fit the above categories. Keep these short.
 - Emotional validation (Reflection, Restatement, Affirmation) almost always \
 comes BEFORE advice (Providing Suggestions).
 - "Others" is only for brief openers, closers, or transitions.
+
+Example valid outputs:
+[Question]
+[Reflection of feelings]
+[Providing Suggestions]
 """
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
+def multiclass_entropy(strategy_preds: list, K: int) -> float:
+    """
+    论文公式: ei = -Σ_{s∈S} p(s|hi) log p(s|hi)
+    p(s|hi) = K次采样中预测为策略s的次数 / K
+    使用自然对数(nats)，与分母 log(|S|)=ln(8) 保持一致。
+    """
+    counts = Counter(strategy_preds)
+    ei = 0.0
+    for count in counts.values():
+        if count > 0:
+            p = count / K
+            ei -= p * math.log(p)   # 自然对数
+    return ei
+
+
 def binary_entropy(ci: float) -> float:
+    """保留用于对比，论文实际不使用此公式。"""
     if ci <= 0.0 or ci >= 1.0:
         return 0.0
     return -ci * math.log2(ci) - (1 - ci) * math.log2(1 - ci)
@@ -262,12 +278,14 @@ def main():
             max_new_tokens=args.max_new_tokens,
         )
 
-        correct = sum(
-            1 for c in completions
-            if extract_strategy(c) == rec["target_strategy"]
-        )
+        # 提取每次采样的策略预测
+        strategy_preds = [extract_strategy(c) or "__none__" for c in completions]
+
+        correct = sum(1 for p in strategy_preds if p == rec["target_strategy"])
         ci = correct / args.K
-        ei = binary_entropy(ci)
+
+        # 论文多分类熵: ei = -Σ p(s) ln p(s)，包含 __none__（解析失败）
+        ei = multiclass_entropy(strategy_preds, args.K)
 
         results.append({
             "dialog_id": rec["dialog_id"],
@@ -278,7 +296,7 @@ def main():
             "ci": ci,
             "ei": ei,
             "region": classify_region(ci),
-            "completions_preview": [c[:80] for c in completions[:3]],  # debug
+            "strategy_counts": dict(Counter(strategy_preds)),  # 完整分布，供调试
         })
 
         # ETA after first turn

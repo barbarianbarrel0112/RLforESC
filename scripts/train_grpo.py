@@ -34,6 +34,7 @@ Usage:
 
 import argparse
 import json
+import math
 import re
 import os
 from pathlib import Path
@@ -54,19 +55,35 @@ STRATEGY_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
-SYSTEM_PROMPT = (
-    "You are a compassionate emotional support counselor. "
-    "Listen empathetically to the user's concerns and provide helpful, "
-    "emotionally supportive responses. Begin each response with a strategy "
-    "tag like [Question] or [Reflection of feelings] to guide your approach."
-)
+SYSTEM_PROMPT = """\
+You are an emotional support counselor. Your ONLY task is to output a strategy tag.
 
-# ── Region weights (paper Table 3) ───────────────────────────────────────────
-REGION_WEIGHTS = {
-    "HK": {"w_acc": 1.0, "w_ent": 0.0},
-    "WK": {"w_acc": 0.5, "w_ent": 0.5},
-    "UK": {"w_acc": 0.0, "w_ent": 1.0},
-}
+⚠️ STRICT FORMAT: Your entire response must be exactly one line:
+[Strategy Name]
+
+Choose from these 8 strategies:
+
+1. **Question** – Ask open-ended questions to understand the user's situation.
+
+2. **Restatement or Paraphrasing** – Restate what the user said to show understanding.
+
+3. **Reflection of feelings** – Identify and reflect back the user's emotions.
+
+4. **Self-disclosure** – Share a brief relevant personal experience to build connection.
+
+5. **Affirmation and Reassurance** – Validate feelings and offer encouragement.
+
+6. **Providing Suggestions** – Offer practical advice when the user is ready.
+
+7. **Information** – Provide factual information relevant to the user's situation.
+
+8. **Others** – For conversation openers, closers, or brief transitions only.
+
+Output ONLY [Strategy Name] — nothing else. Example: [Reflection of feelings]
+"""
+
+# log(|S|) = ln(8) ≈ 2.079，用于论文 reward 公式的熵归一化
+LOG_S = math.log(len(STRATEGIES))
 
 
 def extract_strategy(text: str) -> str | None:
@@ -155,11 +172,10 @@ def load_dual_dataset(boundaries_path: str, tokenizer) -> Dataset:
 # ── Reward functions ──────────────────────────────────────────────────────────
 
 def make_standard_reward_fn():
-    """r = 1 if strategy correct else 0 (no per-sample weighting)."""
+    """标准 GRPO baseline: r = 1 if correct else 0"""
     def reward_fn(prompts, completions, target_strategy, **kwargs):
         rewards = []
         for comp, tgt in zip(completions, target_strategy):
-            # completions may be str or list[dict]; handle both
             text = comp if isinstance(comp, str) else comp[0]["content"]
             pred = extract_strategy(text)
             rewards.append(1.0 if pred == tgt else 0.0)
@@ -169,21 +185,44 @@ def make_standard_reward_fn():
 
 def make_dual_reward_fn():
     """
-    r = w_acc * [1 if correct else 0] + w_ent * ei
-    Weights depend on the sample's knowledge region.
-    """
-    def reward_fn(prompts, completions, target_strategy, ci, ei, region, **kwargs):
-        rewards = []
-        for comp, tgt, _ci, _ei, reg in zip(
-            completions, target_strategy, ci, ei, region
-        ):
-            text = comp if isinstance(comp, str) else comp[0]["content"]
-            pred = extract_strategy(text)
-            correct = 1.0 if pred == tgt else 0.0
+    论文 dual reward（arXiv:2509.12661）完整还原：
 
-            w = REGION_WEIGHTS.get(reg, REGION_WEIGHTS["WK"])
-            r = w["w_acc"] * correct + w["w_ent"] * float(_ei)
-            rewards.append(r)
+        r(hi, ỹi) = ci + r_region(hi, ỹi)
+
+    其中：
+      ci        = 本次 completion ỹi 的准确率（1 if correct else 0）
+      r_region  = 基于知识边界区域和 KB 熵 ei 的区域奖励：
+                  HK/WK: r_region = 1 - ei / log(|S|)   ← 降低熵，强化已知策略
+                  UK:    r_region = ei / log(|S|)        ← 提高熵，鼓励未知探索
+      ei        = 预计算的 KB 多分类熵（来自 knowledge_boundaries 文件）
+                  ei = -Σ_{s∈S} p(s|hi) log p(s|hi)，单位 nats
+      log(|S|)  = ln(8) ≈ 2.079，用于归一化使 r_region ∈ [0, 1]
+
+    KL penalty 由 GRPOConfig(beta=0.001) 在 trainer 内部处理，等价于论文的
+    -β log π(ỹi|hi) / π_ref(ỹi|hi) 项。
+
+    奖励范围：
+      HK (ci_KB=1, ei_KB≈0):  correct → 1+1=2.0, wrong → 0+1=1.0
+      UK (ci_KB=0, ei_KB≈ln8): correct → 1+1=2.0, wrong → 0+1=1.0
+      WK (0<ci_KB<1, 中间ei): 介于 HK 和 UK 之间
+    GRPO 通过组内 advantage = ri - mean(r_group) 提取学习信号。
+    """
+    def reward_fn(prompts, completions, target_strategy, ei, region, **kwargs):
+        rewards = []
+        for comp, tgt, _ei, reg in zip(completions, target_strategy, ei, region):
+            text = comp if isinstance(comp, str) else comp[0]["content"]
+
+            # ci = 本次 completion 的准确率（逐 completion 变化，是 GRPO 的学习信号）
+            ci = 1.0 if extract_strategy(text) == tgt else 0.0
+
+            # r_region = 基于 KB 预计算的静态区域权重（逐 prompt 固定）
+            _ei = float(_ei)
+            if reg in ("HK", "WK"):
+                r_region = 1.0 - _ei / LOG_S   # 已知区域：鼓励低熵（自信正确）
+            else:  # UK
+                r_region = _ei / LOG_S          # 未知区域：鼓励高熵（多样探索）
+
+            rewards.append(ci + r_region)
         return rewards
     return reward_fn
 
@@ -194,13 +233,13 @@ def main():
     parser = argparse.ArgumentParser(description="GRPO training for ESC")
     parser.add_argument("--mode", choices=["standard", "dual"], required=True,
                         help="standard = binary accuracy reward; dual = paper's dual reward")
-    parser.add_argument("--model_path", default="checkpoints/qwen25-esc",
-                        help="Path to SFT checkpoint (policy init)")
+    parser.add_argument("--model_path", default="/mnt/teamdrive/models/Qwen2.5-7B-Instruct",
+                        help="初始策略模型（Agent方案用base model，SFT方案用checkpoints/qwen25-esc-v2）")
     parser.add_argument("--esconv_dir", default="data/ESConv_cleaned",
-                        help="ESConv cleaned directory (used in standard mode)")
+                        help="ESConv cleaned 目录（standard mode 使用）")
     parser.add_argument("--boundaries_path",
-                        default="data/knowledge_boundaries/train_turns_with_boundaries.json",
-                        help="Knowledge boundary file (used in dual mode)")
+                        default="data/knowledge_boundaries_v4/train_turns_with_boundaries.json",
+                        help="知识边界文件（dual mode 使用，v4为Agent+多分类熵修正版）")
     parser.add_argument("--output_dir", required=True,
                         help="Output directory for GRPO checkpoint")
 
