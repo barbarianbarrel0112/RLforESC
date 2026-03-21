@@ -303,7 +303,7 @@ def main():
     print(f"  Epochs  : {args.num_train_epochs}")
     print(f"  G (gens): {args.num_generations}")
     print(f"  LR      : {args.learning_rate}")
-    print(f"  KL β    : {args.kl_coef}")
+    print(f"  KL β    : {args.beta}")
     print(f"  Output  : {args.output_dir}")
     print(f"{'='*60}\n")
 
